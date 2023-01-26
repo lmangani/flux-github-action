@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  fluxpipe:
     runs-on: ubuntu-latest
     steps:
-    - uses: lmangani/flux-github-action@v1.0.0
+    - uses: lmangani/flux-github-action@v1.192.3
     - env:
         KEY_NAME: fluxpipe
       run: |
