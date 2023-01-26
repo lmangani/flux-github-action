@@ -17,5 +17,7 @@ jobs:
         --data-binary @- << EOF
           import "array"
           import "runtime"
-          array.from(rows: [{version: runtime.version() }])
+          import "influxdata/influxdb/secrets"
+          key = secrets.get(key: "KEY_NAME")
+          array.from(rows: [{version: runtime.version(), key: key }])
         EOF
