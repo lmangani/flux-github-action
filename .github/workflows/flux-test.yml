@@ -8,18 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: lmangani/flux-github-action@v1.0.0
-    - name: create string
-      run: |
-        FLUX=$(cat << EOF
-          import "array"
-          import "runtime"
-          import "influxdata/influxdb/secrets"
-          key = secrets.get(key: "KEY_NAME")
-          array.from(rows: [{version: runtime.version(), key: key }])
-        EOF
-        )
-        echo "script=$FLUX" >> $GITHUB_OUTPUT
-      id: flux
     - env:
         KEY_NAME: fluxpipe
       run: |
@@ -27,5 +15,9 @@ jobs:
         -H 'Accept:application/csv' \
         -H 'Content-type:application/vnd.flux' \
         --data-binary @- << EOF
-          ${{ steps.flux.outputs.script }}
-          EOF
+          import "array"
+          import "runtime"
+          import "influxdata/influxdb/secrets"
+          key = secrets.get(key: "KEY_NAME")
+          array.from(rows: [{version: runtime.version(), key: key }])
+        EOF
