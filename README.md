@@ -11,8 +11,7 @@ Fluxpipe offers an _InfluxDB-like_ API on port `8086`
 ```yaml
 steps:
   - name: Flux in GitHub Actions
-    uses: lmangani/flux-github-action@v1.0.0
-
+    uses: lmangani/flux-github-action@main
 # License
 
 This project released under the [MIT License](LICENSE)
