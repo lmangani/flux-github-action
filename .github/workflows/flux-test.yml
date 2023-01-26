@@ -1,0 +1,29 @@
+name: FLUX TEST
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: lmangani/flux-github-action@v0.192.3
+    - name: create string
+      run: |
+        FLUX=$(cat << EOF
+          import "array"
+          import "runtime"
+          import "influxdata/influxdb/secrets"
+          key = secrets.get(key: "KEY_NAME")
+          array.from(rows: [{version: runtime.version(), key: key }])
+        EOF
+        )
+        echo "::set-output name=script::$FLUX"
+      id: flux
+    - env:
+        KEY_NAME: fluxpipe
+      run: |
+        curl -XPOST localhost:8086/api/v2/query -sS \
+        -H 'Accept:application/csv' \
+        -H 'Content-type:application/vnd.flux' \
+        -d ' ${{ steps.flux.outputs.script }}'
