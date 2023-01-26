@@ -18,7 +18,7 @@ jobs:
           array.from(rows: [{version: runtime.version(), key: key }])
         EOF
         )
-        echo "::set-output name=script::$FLUX"
+        echo "script=$FLUX" >> $GITHUB_OUTPUT
       id: flux
     - env:
         KEY_NAME: fluxpipe
@@ -26,4 +26,6 @@ jobs:
         curl -XPOST localhost:8086/api/v2/query -sS \
         -H 'Accept:application/csv' \
         -H 'Content-type:application/vnd.flux' \
-        -d ' ${{ steps.flux.outputs.script }}'
+        --data-binary @- << EOF
+          ${{ steps.flux.outputs.script }}
+          EOF
