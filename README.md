@@ -6,9 +6,12 @@ This action sets up a [Fluxpipe](https://github.com/metrico/fluXpipe) instance t
 
 # Usage
 
+Fluxpipe offers an _InfluxDB-like_ API on port `8086`
+
 ```yaml
 steps:
-  - uses: lmangani/flux-github-action@v1.0.0
+  - name: Flux in GitHub Actions
+    uses: lmangani/flux-github-action@v0.192.3
 ```
 
 # License
