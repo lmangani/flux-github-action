@@ -1,4 +1,5 @@
-FROM docker:stable
-COPY start-fluxpipe.sh /start-fluxpipe.sh
-RUN chmod +x /start-fluxpipe.sh
-ENTRYPOINT ["/start-fluxpipe.sh"]
+FROM alpine
+RUN apk add --allow-untrusted --update --no-cache curl ca-certificates
+WORKDIR /
+RUN curl -fsSL github.com/metrico/fluxpipe/releases/latest/download/fluxpipe-server -O && chmod +x fluxpipe-server
+CMD ["/fluxpipe-server", "-port", "8080"]
