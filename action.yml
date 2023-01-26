@@ -1,0 +1,10 @@
+name: 'Flux in GitHub Actions'
+description: 'Start a Fluxpipe Server'
+
+branding:
+  icon: 'database'
+  color: 'yellow'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
