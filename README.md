@@ -2,11 +2,9 @@
 
 # Flux GitHub Action
 
-This action sets up a [Fluxpipe](https://github.com/metrico/fluXpipe) instance to execute [Flux](https://github.com/influxdata/flux) scripts.
+This action sets up a [Fluxpipe](https://github.com/metrico/fluXpipe) runner to execute [Flux](https://github.com/influxdata/flux) scripts.
 
 # Usage
-
-Fluxpipe offers an _InfluxDB-like_ API on port `8086`
 
 ```yaml
 steps:
@@ -19,19 +17,15 @@ steps:
 jobs:
   fluxpipe:
     runs-on: ubuntu-latest
+    name: Run a Flux Script
     steps:
-    - uses: lmangani/flux-github-action@main
-    - env:
-        KEY_NAME: fluxpipe
-      run: |
-        curl -XPOST localhost:8086/api/v2/query -sS \
-        -H 'Accept:application/csv' \
-        -H 'Content-type:application/vnd.flux' \
-        --data-binary @- << EOFLUX
-              import "array"
-              import "runtime"
-              array.from(rows: [{version: runtime.version() }])
-        EOFLUX
+      - name: Flux Run
+        id: flux
+        uses: lmangani/flux-github-action@main
+        with:
+          flux-script: 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
+      - name: Flux Result
+        run: echo "${{ steps.flux.outputs.result }}"
 ```
 
 # License
