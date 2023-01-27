@@ -1,0 +1,17 @@
+name: FLUX TEST
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fluxpipe:
+    runs-on: ubuntu-latest
+    name: Run a Flux Script
+    steps:
+      - name: Flux Run
+        id: flux
+        uses: lmangani/flux-github-action@main
+        with:
+          flux-script: 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
+      - name: Flux JSON Result
+        run: echo "${{ steps.flux.outputs.result }}"
