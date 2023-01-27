@@ -7,7 +7,7 @@ jobs:
   fluxpipe:
     runs-on: ubuntu-latest
     steps:
-    - uses: lmangani/flux-github-action@main
+    - uses: lmangani/flux-github-action@use-latest-ghcr
     - env:
         KEY_NAME: fluxpipe
       run: |
