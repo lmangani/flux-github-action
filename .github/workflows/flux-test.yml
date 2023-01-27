@@ -7,10 +7,13 @@ jobs:
   fluxpipe:
     runs-on: ubuntu-latest
     steps:
-    - uses: lmangani/flux-github-action@use-latest-ghcr
-    - run: curl http://127.0.0.1:8086
-    - run: |
-        curl -XPOST http://127.0.0.1:8086/api/v2/query -sS \
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Set up Fluxpipe
+      uses: lmangani/flux-github-action@use-latest-ghcr
+    - name: Run Flux Query
+      run: |
+        curl -XPOST http://localhost:8086/api/v2/query -sS \
         -H 'Accept:application/csv' \
         -H 'Content-type:application/vnd.flux' \
         -d 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
