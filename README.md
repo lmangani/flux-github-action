@@ -13,6 +13,7 @@ steps:
 ```
 
 ## Example
+### CSV Output
 ```yaml
 jobs:
   fluxpipe:
@@ -27,6 +28,23 @@ jobs:
       - name: Flux Result
         run: echo "${{ steps.flux.outputs.result }}"
 ```
+
+### JSON Output
+```yaml
+jobs:
+  fluxpipe:
+    runs-on: ubuntu-latest
+    name: Run a Flux Script
+    steps:
+      - name: Flux Run
+        id: flux
+        uses: lmangani/flux-github-action@json
+        with:
+          flux-script: 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
+      - name: Flux Result
+        run: echo "${{ steps.flux.outputs.result }}"
+```
+
 
 # License
 This project released under the [MIT License](LICENSE)
