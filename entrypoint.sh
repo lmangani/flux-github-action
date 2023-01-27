@@ -1,5 +1,6 @@
 #!/bin/sh -l
 echo "Running Fluxpipe"
 echo $1
-result=$(echo $1 | /fluxpipe-server -stdin)
-echo "result=$result" >> $GITHUB_OUTPUT
+echo 'result<<EOF' >> $GITHUB_OUTPUT
+echo $1 | /fluxpipe-server -stdin >> $GITHUB_OUTPUT
+echo 'EOF' >> $GITHUB_OUTPUT
