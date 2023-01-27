@@ -12,8 +12,10 @@ steps:
     uses: lmangani/flux-github-action@main
 ```
 
-## Example
-### CSV Output
+<br>
+
+## Examples
+### Flux w/ CSV Output
 ```yaml
 jobs:
   fluxpipe:
@@ -36,7 +38,9 @@ jobs:
 ,,0,v0.192.0
 ```
 
-### JSON Output
+<br>
+
+### Flux w/ JSON Output
 ```yaml
 jobs:
   fluxpipe:
