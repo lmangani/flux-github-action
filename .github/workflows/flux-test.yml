@@ -14,8 +14,4 @@ jobs:
         curl -XPOST localhost:8086/api/v2/query -sS \
         -H 'Accept:application/csv' \
         -H 'Content-type:application/vnd.flux' \
-        --data-binary @- << EOF
-          import "array"
-          import "runtime"
-          array.from(rows: [{version: runtime.version() }])
-        EOF
+        -d 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
