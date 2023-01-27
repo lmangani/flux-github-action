@@ -8,9 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: lmangani/flux-github-action@use-latest-ghcr
-    - env:
-        KEY_NAME: fluxpipe
-      run: |
+    - run: curl localhost:8086 -sS
+    - run: |
         curl -XPOST localhost:8086/api/v2/query -sS \
         -H 'Accept:application/csv' \
         -H 'Content-type:application/vnd.flux' \
