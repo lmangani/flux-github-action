@@ -22,11 +22,18 @@ jobs:
     steps:
       - name: Flux Run
         id: flux
-        uses: lmangani/flux-github-action@main
+        uses: lmangani/flux-github-action@csv
         with:
           flux-script: 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
       - name: Flux Result
         run: echo "${{ steps.flux.outputs.result }}"
+```
+```csv
+#datatype,string,long,string
+#group,false,false,false
+#default,_result,,
+,result,table,version
+,,0,v0.192.0
 ```
 
 ### JSON Output
@@ -43,6 +50,33 @@ jobs:
           flux-script: 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
       - name: Flux Result
         run: echo "${{ steps.flux.outputs.result }}"
+```
+```javascript
+[
+	{
+		columns: {
+			result: {
+				index: 1,
+				type: string
+			},
+			table: {
+				index: 2,
+				type: long
+			},
+			version: {
+				index: 3,
+				type: string
+			}
+		},
+		rows: [
+			{
+				result: _result,
+				table: 0,
+				version: v0.192.0
+			}
+		]
+	}
+]
 ```
 
 
