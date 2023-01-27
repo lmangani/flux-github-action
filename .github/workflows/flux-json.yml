@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Flux Run
         id: flux
-        uses: lmangani/flux-github-action@main
+        uses: lmangani/flux-github-action@json
         with:
           flux-script: 'import "array" import "runtime" array.from(rows: [{version: runtime.version()}])'
       - name: Flux JSON Result
