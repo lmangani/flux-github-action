@@ -1,4 +1,4 @@
-# <img src="https://user-images.githubusercontent.com/1423657/162720189-976cc0cc-7511-4278-a942-9c4e7cc9148a.png" width=250 />
+# <img src="https://user-images.githubusercontent.com/1423657/226455050-0db3e605-c18b-4d60-9144-0de34d8a689f.png" width=250 />
 
 # Flux GitHub Action
 
